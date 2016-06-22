@@ -2,7 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%
+	User u = (User)request.getAttribute("user");
+	if(u!=null){
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,11 +40,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="profile.html">eSchool</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.jsp">Home</a></li>
+            <li class="active"><a href="profile.html">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -53,7 +56,7 @@
 
       <div class="starter-template">
       
-      	<form:form class="form-horizontal" commandName="user">
+      	<form:form class="form-horizontal" commandName="new_user">
 		  <div class="form-group">
 		    <form:label path="login" for="inputEmail3" class="col-sm-2 control-label">Login</form:label>
 		    <div class="col-sm-5">
@@ -106,4 +109,5 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+<% } %>
 

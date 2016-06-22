@@ -52,6 +52,7 @@
       </div>
       
       <a href="login.html">Login</a>
+      <%response.sendRedirect("login.html"); %>
 
     </div><!-- /.container -->
 

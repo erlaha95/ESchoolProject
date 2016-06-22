@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	User user = null; 
 	user = (User)request.getAttribute("user");
@@ -41,11 +42,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="profile.html">eSchool</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.jsp">Home</a></li>
+            <li class="active"><a href="profile.html">Home</a></li>
             <li><a href="signup.html">Add user</a></li>
             <li><a href="logout">Log out</a></li>
           </ul>
@@ -56,16 +57,14 @@
     <div class="container">
 
       <div class="starter-template">
-      
-      	<p>Hello ${user.name}</p>
       	
-      	
-      		<c:forEach items="${users}" var="user" >
-      			<p>${user.name} ${user.surname}</p>
-      		</c:forEach>
+      	<h1>Admin page</h1>
+      	<h2>Hello ${user.name}</h2>
+      	<a class="btn btn-default" href="signup.html" role="button">Add user</a>
       	
       	
       	<c:if test="${not empty users}">
+      		<h3>Students</h3>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -82,11 +81,12 @@
 						<td>${user.surname}</td>
 						<td>${user.group}</td>
 						<td>
-							<%-- <c:url var="delUrl" value="/deleteUser"/>
-							<form:form id="frmFoo" action="${delUrl}" method="POST" modelAttribute="userDel">
-								<form:input path="id"  type="hidden" value="${user.id}" />
+							
+							<form:form commandName="user_del" action="delete_user.html" method="POST">
+								
+								<form:hidden path="id" value="${user.id}"/>
 								<form:button type="submit" class="btn btn-default">Delete</form:button>
-							</form:form> --%>
+							</form:form>
 						</td>
 					</tr>
 					</c:forEach>

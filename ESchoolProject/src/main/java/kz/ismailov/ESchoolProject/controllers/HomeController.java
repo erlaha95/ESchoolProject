@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import kz.ismailov.ESchoolProject.model.User;
+import kz.ismailov.ESchoolProject.model.UserDelete;
 import kz.ismailov.ESchoolProject.model.UserLogin;
 import kz.ismailov.ESchoolProject.services.UserService;
 
@@ -24,6 +26,7 @@ public class HomeController {
 	
 	@Autowired
 	private UserService userService;
+	
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public ModelAndView login() {
@@ -35,15 +38,8 @@ public class HomeController {
 		String login = userLogin.getLogin();
 		String password = userLogin.getPassword();
 		User user = userService.authenticate(login, password);
-		if(user!=null){
+		if(user!=null && user.getLogin().equals("admin")){
 			model.addAttribute("user", user);
-			List<User>users = new ArrayList<User>();
-			users = userService.getAllUsers();
-			model.addAttribute("users", users);
-			for(User u:users){
-				System.out.println(u.getName());
-			}
-			//login.model.addAttribute("delUser", new User());
 			session.setAttribute("user", user);
 			return "redirect:profile.html";
 		}else{
@@ -52,11 +48,35 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/profile", method=RequestMethod.GET)
-	public String profile(HttpSession session){
+	public String profile(Model model, HttpSession session, ModelMap modelMap){
 		if(session.getAttribute("user")!=null){
+			List<User>users = new ArrayList<User>();
+			users = userService.getAllUsers();
+			model.addAttribute("users", users);
+			UserDelete user_del = new UserDelete();
+			model.addAttribute("user_del", user_del);
 			return "profile";
 		}else{
 			return "redirect:index.jsp";
+		}
+	}
+	
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	public ModelAndView test(HttpSession session){
+		if(session.getAttribute("user")!=null){
+			List<String> list = new ArrayList<String>();
+			list.add("List A");
+			list.add("List B");
+			list.add("List C");
+			list.add("List D");
+			list.add("List 1");
+			list.add("List 2");
+			list.add("List 3");
+			ModelAndView model = new ModelAndView("test");
+			model.addObject("lists", list);
+			return model;
+		}else{
+			return new ModelAndView("index", "lists", null);
 		}
 	}
 	
@@ -64,8 +84,8 @@ public class HomeController {
 	public String signup(Model model, HttpSession session) {
 		if(session.getAttribute("user")!=null){
 			User user = new User();
-			model.addAttribute("user", user);
-			return "redirect:profile.html";
+			model.addAttribute("new_user", user);
+			return "signup";
 		}else {
 			return "redirect:login.html";
 		}
@@ -73,9 +93,17 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signup(@ModelAttribute("user") User user, Model model){
+	public String signup(@ModelAttribute("new_user") User user, Model model){
 		userService.addUser(user);
-		return "redirect:login.html";
+		return "redirect:profile.html";
+	}
+	
+	@RequestMapping(value="/delete_user", method=RequestMethod.POST)
+	public String signup(@ModelAttribute("user_del") UserDelete userDel){
+		Long id = userDel.getId();
+		System.out.println("---Delete user, id="+id);
+		userService.deleteUser(id);
+		return "redirect:profile.html";
 	}
 
 }

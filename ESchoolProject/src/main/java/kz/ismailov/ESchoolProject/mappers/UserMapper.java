@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Options.FlushCachePolicy;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kz.ismailov.ESchoolProject.model.User;
 
@@ -19,7 +20,10 @@ public interface UserMapper {
 	@Select("SELECT * FROM users WHERE login = #{login} AND password = #{password}")
 	public User authenticate(@Param("login")String login, @Param("password")String password);
 	
-	@Select("SELECT * FROM users WHERE active=1")
+	@Select("SELECT * FROM users WHERE active=1 AND login!='admin'")
 	public List<User>getAllUsers();
+	
+	@Update("UPDATE users SET active=0 WHERE id=#{id}")
+	public void deleteUser(Long id);
 
 }

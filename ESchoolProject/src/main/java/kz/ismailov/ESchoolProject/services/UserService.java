@@ -8,4 +8,5 @@ public interface UserService {
 	public void addUser(User user);
 	public User authenticate(String login, String password);
 	public List<User>getAllUsers();
+	public void deleteUser(Long id);
 }
