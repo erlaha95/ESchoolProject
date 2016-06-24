@@ -9,8 +9,9 @@ public class User {
 	private String surname;
 	private String group;
 	private int active;
+	private int role;
 	
-	public User(Long id, String login, String password, String name, String surname, String group, int active) {
+	public User(Long id, String login, String password, String name, String surname, String group, int active, int role) {
 		this.id = id;
 		this.login = login;
 		this.password = password;
@@ -18,6 +19,7 @@ public class User {
 		this.surname = surname;
 		this.group = group;
 		this.active = active;
+		this.role = role;
 	}
 	public User(){
 		
@@ -65,11 +67,17 @@ public class User {
 	public void setActive(int active) {
 		this.active = active;
 	}
-	
+	public int getRole() {
+		return role;
+	}
+	public void setRole(int role) {
+		this.role = role;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", login=" + login + ", password=" + password + ", name=" + name + ", surname="
-				+ surname + ", group=" + group + ", active=" + active + "]";
+				+ surname + ", group=" + group + ", active=" + active + ", role=" + role + "]";
 	}
+	
 
 }

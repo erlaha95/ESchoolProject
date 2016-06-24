@@ -13,14 +13,14 @@ import kz.ismailov.ESchoolProject.model.User;
 
 public interface UserMapper {
 	
-	@Insert("INSERT INTO users VALUES(NULL, #{login}, #{password}, #{name}, #{surname}, #{group}, 1)")
+	@Insert("INSERT INTO users VALUES(NULL, #{login}, #{password}, #{name}, #{surname}, #{group}, 1, 0)")
 	@Options(useGeneratedKeys=true, keyProperty="id", flushCache=FlushCachePolicy.TRUE, keyColumn="id")
 	public void addUser(User user);
 	
-	@Select("SELECT * FROM users WHERE login = #{login} AND password = #{password}")
+	@Select("SELECT * FROM users WHERE login = #{login} AND password = #{password} AND role=1")
 	public User authenticate(@Param("login")String login, @Param("password")String password);
 	
-	@Select("SELECT * FROM users WHERE active=1 AND login!='admin'")
+	@Select("SELECT * FROM users WHERE active=1 AND role!=1")
 	public List<User>getAllUsers();
 	
 	@Update("UPDATE users SET active=0 WHERE id=#{id}")

@@ -37,7 +37,7 @@ public class HomeController {
 		String login = userLogin.getLogin();
 		String password = userLogin.getPassword();
 		User user = userService.authenticate(login, password);
-		if(user!=null && user.getLogin().equals("admin")){
+		if(user!=null){
 			model.addAttribute("user", user);
 			session.setAttribute("user", user);
 			return "redirect:profile.html";
