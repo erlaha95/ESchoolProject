@@ -65,5 +65,11 @@ public class User {
 	public void setActive(int active) {
 		this.active = active;
 	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", login=" + login + ", password=" + password + ", name=" + name + ", surname="
+				+ surname + ", group=" + group + ", active=" + active + "]";
+	}
 
 }

@@ -45,8 +45,8 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="profile.html">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="signup.html">Add user</a></li>
+            <li><a href="logout.html">Log out</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -89,7 +89,7 @@
 		  </div>
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <form:button type="submit" class="btn btn-default">Sign up</form:button>
+		      <form:button type="submit" class="btn btn-default">Add user</form:button>
 		    </div>
 		  </div>
 		</form:form>

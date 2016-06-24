@@ -33,6 +33,7 @@
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-test</artifactId>
     	<version>4.3.0.RELEASE</version>
+    	<scope>test</scope>
     </dependency>
     <dependency>
     	<groupId>mysql</groupId>
@@ -64,7 +65,14 @@
     	<artifactId>spring-jdbc</artifactId>
     	<version>4.3.0.RELEASE</version>
     </dependency>
+    <dependency>
+    	<groupId>org.testng</groupId>
+    	<artifactId>testng</artifactId>
+    	<version>6.8.7</version>
+    	<scope>test</scope>
+    </dependency>
   </dependencies>
+  
   <build>
     <finalName>ESchoolProject</finalName>
   </build>

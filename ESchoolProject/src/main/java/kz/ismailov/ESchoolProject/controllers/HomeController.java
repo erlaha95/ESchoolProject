@@ -27,7 +27,6 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
-	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public ModelAndView login() {
 		return new ModelAndView("login", "userLogin", new UserLogin());
@@ -55,6 +54,8 @@ public class HomeController {
 			model.addAttribute("users", users);
 			UserDelete user_del = new UserDelete();
 			model.addAttribute("user_del", user_del);
+			User user = new User();
+			model.addAttribute("new_user", user);
 			return "profile";
 		}else{
 			return "redirect:index.jsp";
@@ -62,21 +63,11 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/test", method=RequestMethod.GET)
-	public ModelAndView test(HttpSession session){
+	public String test(HttpSession session){
 		if(session.getAttribute("user")!=null){
-			List<String> list = new ArrayList<String>();
-			list.add("List A");
-			list.add("List B");
-			list.add("List C");
-			list.add("List D");
-			list.add("List 1");
-			list.add("List 2");
-			list.add("List 3");
-			ModelAndView model = new ModelAndView("test");
-			model.addObject("lists", list);
-			return model;
+			return "test";
 		}else{
-			return new ModelAndView("index", "lists", null);
+			return "";
 		}
 	}
 	
@@ -90,6 +81,13 @@ public class HomeController {
 			return "redirect:login.html";
 		}
 		
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		
+		session.setAttribute("user", null);
+		return "redirect:login.html";
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)

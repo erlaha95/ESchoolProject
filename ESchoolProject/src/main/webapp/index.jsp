@@ -32,13 +32,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/">eSchool</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="login.html">Log in</a></li>
-            <li><a href="signup.html">Sign up</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

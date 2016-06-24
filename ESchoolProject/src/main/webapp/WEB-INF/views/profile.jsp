@@ -29,6 +29,28 @@
 		<link href="starter-template.css" rel="stylesheet">
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+        
+        <script type="text/javascript">
+	        $(document).ready(function(){
+	        	hideForm();
+	        });
+
+        	function showForm(){
+        		if ($("#formBtn").text() == "Add user") { 
+        			$("#formBtn").text("Hide form"); 
+        		} else { 
+        			$("#formBtn").text("Add user"); 
+        		}
+				$("#showUserForm").toggle();				
+    		}	
+        	
+        	function hideForm(){
+        		$("#showUserForm").hide();
+        	}
+    		
+        </script>
   </head>
 
   <body>
@@ -48,7 +70,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="profile.html">Home</a></li>
             <li><a href="signup.html">Add user</a></li>
-            <li><a href="logout">Log out</a></li>
+            <li><a href="logout.html">Log out</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -60,8 +82,48 @@
       	
       	<h1>Admin page</h1>
       	<h2>Hello ${user.name}</h2>
-      	<a class="btn btn-default" href="signup.html" role="button">Add user</a>
       	
+      	<a class="btn btn-default" onclick="showForm()" id="formBtn" role="button">Add user</a>
+      	
+      	<div id="showUserForm">
+      		<form:form class="form-horizontal" commandName="new_user" action="signup.html" method="POST">
+		  <div class="form-group">
+		    <form:label path="login" for="inputEmail3" class="col-sm-2 control-label">Login</form:label>
+		    <div class="col-sm-5">
+		      <form:input path="login" type="text" class="form-control" id="inputEmail3" placeholder="Username"/>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <form:label path="password" for="inputPassword3" class="col-sm-2 control-label">Password</form:label>
+		    <div class="col-sm-5">
+		      <form:input path="password" type="password" class="form-control" id="inputPassword3" placeholder="Password"/>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <form:label path="name" for="inputEmail3" class="col-sm-2 control-label">Name</form:label>
+		    <div class="col-sm-5">
+		      <form:input path="name" type="text" class="form-control" id="inputEmail3" placeholder="Name"/>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <form:label path="surname" for="inputEmail3" class="col-sm-2 control-label">Surname</form:label>
+		    <div class="col-sm-5">
+		      <form:input path="surname" type="text" class="form-control" id="inputEmail3" placeholder="Surname"/>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <form:label path="group" for="inputEmail3" class="col-sm-2 control-label">Group</form:label>
+		    <div class="col-sm-5">
+		      <form:input path="group" type="text" class="form-control" id="inputEmail3" placeholder="Group"/>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <form:button type="submit" class="btn btn-default">Add</form:button>
+		    </div>
+		  </div>
+		</form:form>
+      	</div>
       	
       	<c:if test="${not empty users}">
       		<h3>Students</h3>
