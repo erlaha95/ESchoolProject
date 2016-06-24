@@ -1,11 +1,12 @@
+<%@page import="kz.ismailov.ESchoolProject.model.UserLogin"%>
 <%@page import="kz.ismailov.ESchoolProject.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	User user = null; 
-	user = (User)request.getAttribute("user");
+	UserLogin user = null; 
+	user = (UserLogin)request.getAttribute("user");
 	if(user!=null){
 %>
 <!DOCTYPE html>
@@ -81,7 +82,7 @@
       <div class="starter-template">
       	
       	<h1>Admin page</h1>
-      	<h2>Hello ${user.name}</h2>
+      	<h2>Hello ${user.login}</h2>
       	
       	<a class="btn btn-default" onclick="showForm()" id="formBtn" role="button">Add user</a>
       	

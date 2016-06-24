@@ -1,9 +1,10 @@
+<%@page import="kz.ismailov.ESchoolProject.model.UserLogin"%>
 <%@page import="kz.ismailov.ESchoolProject.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%
-	User u = (User)request.getAttribute("user");
+	UserLogin u = (UserLogin)request.getAttribute("user");
 	if(u!=null){
 %>
 <!DOCTYPE html>

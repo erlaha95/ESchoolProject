@@ -36,10 +36,11 @@ public class HomeController {
 	public String login(@ModelAttribute("userLogin") UserLogin userLogin, Model model, HttpSession session) {
 		String login = userLogin.getLogin();
 		String password = userLogin.getPassword();
-		User user = userService.authenticate(login, password);
-		if(user!=null){
-			model.addAttribute("user", user);
-			session.setAttribute("user", user);
+		//User user = userService.authenticate(login, password);
+		
+		if(userLogin.getLogin().equals("admin") && userLogin.getPassword().equals("123")){
+			model.addAttribute("admin", userLogin);
+			session.setAttribute("user", userLogin);
 			return "redirect:profile.html";
 		}else{
 			return "login";
@@ -99,7 +100,6 @@ public class HomeController {
 	@RequestMapping(value="/delete_user", method=RequestMethod.POST)
 	public String signup(@ModelAttribute("user_del") UserDelete userDel){
 		Long id = userDel.getId();
-		System.out.println("---Delete user, id="+id);
 		userService.deleteUser(id);
 		return "redirect:profile.html";
 	}
